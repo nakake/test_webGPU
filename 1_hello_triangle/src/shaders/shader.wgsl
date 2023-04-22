@@ -6,7 +6,6 @@ struct Fragment {
 @vertex
 fn vs_main(@builtin(vertex_index) v_id: u32) -> Fragment {
 
-    //pre-bake positions and colors, for now.
     var positions = array<vec2<f32>, 3> (
         vec2<f32>( 0.0,  0.5),
         vec2<f32>(-0.5, -0.5),

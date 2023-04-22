@@ -1,4 +1,5 @@
 import shader from "./shaders/shader.wgsl";
+import { TriangleMesh } from "./triangle_mesh";
 
 const Initialize = async() => {
 
@@ -12,6 +13,8 @@ const Initialize = async() => {
         format: format,
         alphaMode: "opaque"
     });
+
+    const triangleMesh: TriangleMesh = new TriangleMesh(device);
 
     const bindGroupLayout = device.createBindGroupLayout({
         entries: [],
@@ -31,7 +34,8 @@ const Initialize = async() => {
             module : device.createShaderModule({
                 code : shader
             }),
-            entryPoint : "vs_main"
+            entryPoint : "vs_main",
+            buffers: [triangleMesh.bufferLayout,]
         },
 
         fragment : {
@@ -62,6 +66,7 @@ const Initialize = async() => {
         }]
     });
     renderpass.setPipeline(pipeline);
+    renderpass.setVertexBuffer(0, triangleMesh.buffer);
     renderpass.setBindGroup(0, bindGroup)
     renderpass.draw(3, 1, 0, 0);
     renderpass.end();

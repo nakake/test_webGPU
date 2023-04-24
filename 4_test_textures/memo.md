@@ -1,0 +1,2 @@
+- distフォルダーにimagフォルダーを作成し画像を入れる<br>
+- material.initializeにTexture画像のパスを入力する
